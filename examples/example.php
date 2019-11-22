@@ -11,6 +11,10 @@ $router->get('/', function ($req, $res) {
     foreach($req->getHeaders() as $header => $value) {
         $html .= "<br>$header = $value";
     }
+    $html .= "<br>Params:";
+    foreach($req->getParams() as $param => $value) {
+        $html .= "<br>$param = $value";
+    }
     return $res->withHtml($html);
 });
 

@@ -4,13 +4,8 @@ namespace FilippoFinke;
 
 class Router
 {
-    private $routes;
-
-    public function __construct()
-    {
-        $this->routes = array();
-    }
-
+    private $routes = array();
+    
     public function get($uri, $function)
     {
         if (!isset($this->routes["GET"])) {
@@ -21,14 +16,7 @@ class Router
 
     public function start()
     {
-        $request = new Request(
-            $_SERVER["REQUEST_URI"],
-            $_SERVER["REQUEST_METHOD"],
-            getallheaders(),
-            $_SERVER["REMOTE_ADDR"],
-            $_SERVER["REQUEST_TIME"],
-            $_SERVER["REQUEST_TIME_FLOAT"],
-        );
+        $request = new Request();
         $uri = $request->getUri();
         $method = $request->getMethod();
         if (isset($this->routes[$method])) {

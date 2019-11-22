@@ -16,6 +16,8 @@ class Request
 
     private $timeFloat;
 
+    private $params;
+
     public function getUri()
     {
         return $this->uri;
@@ -54,20 +56,34 @@ class Request
         return null;
     }
 
+    public function getParams()
+    {
+        return $this->params;
+    }
 
-    public function __construct(
-        $uri,
-        $method,
-        $headers,
-        $remoteAddress,
-        $time,
-        $timeFloat
-    ) {
-        $this->uri = $uri;
-        $this->method = $method;
-        $this->headers = $headers;
-        $this->remoteAddress = $remoteAddress;
-        $this->time = $time;
-        $this->timeFloat = $timeFloat;
+    public function getParam($param)
+    {
+        if (isset($this->params[$param])) {
+            return $this->params[$param];
+        }
+        return null;
+    }
+
+
+    public function __construct()
+    {
+        $this->uri = $_SERVER["PHP_SELF"];
+        $this->method = $_SERVER["REQUEST_METHOD"];
+        $this->headers = getallheaders();
+        $this->remoteAddress = $_SERVER["REMOTE_ADDR"];
+        $this->time = $_SERVER["REQUEST_TIME"];
+        $this->timeFloat = $_SERVER["REQUEST_TIME_FLOAT"];
+        if ($this->getMethod() === "GET") {
+            $this->params = $_GET;
+        } elseif ($this->getMethod() === "POST") {
+            $this->params = $_POST;
+        } else {
+            $this->params = array();
+        }
     }
 }
