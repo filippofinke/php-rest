@@ -19,10 +19,6 @@ class Router
         $this->routes["GET"][] = new Route($uri, $function);
     }
 
-    public function post($route, $function)
-    {
-    }
-
     public function start()
     {
         $request = new Request(
@@ -44,7 +40,8 @@ class Router
             }
         }
         if (!$routeFound) {
-            echo $method.' '.$uri.' not found';
+            $response = new Response();
+            return $response->withText("$method $uri not found")->withStatus(404);
         }
     }
 }
