@@ -24,7 +24,10 @@ class Router
         $request = new Request(
             $_SERVER["REQUEST_URI"],
             $_SERVER["REQUEST_METHOD"],
-            $_SERVER["REMOTE_ADDR"]
+            getallheaders(),
+            $_SERVER["REMOTE_ADDR"],
+            $_SERVER["REQUEST_TIME"],
+            $_SERVER["REQUEST_TIME_FLOAT"],
         );
         $uri = $request->getUri();
         $method = $request->getMethod();
