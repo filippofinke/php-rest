@@ -10,6 +10,18 @@ class Response
 
     private $status = 200;
 
+    public function getHeaders() {
+        return $this->headers;
+    }
+
+    public function getContent() {
+        return $this->content;
+    }
+
+    public function getStatus() {
+        return $this->status;
+    }
+
     public function withHeader($header, $value)
     {
         $this->headers[$header] = $value;
@@ -39,6 +51,11 @@ class Response
     {
         $this->withHeader('Content-Type', 'application/json');
         $this->content = \json_encode($array);
+        return $this;
+    }
+
+    public function append($content) {
+        $this->content .= $content;
         return $this;
     }
 

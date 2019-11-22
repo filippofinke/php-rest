@@ -55,7 +55,8 @@ class Router
             $routes = $this->routes[$method];
             foreach ($routes as $route) {
                 if ($route->getUri() === $uri) {
-                    return $route->call($request, new Response());
+                    $response = new Response();
+                    return $route->call($request, $response);
                 }
             }
         }
