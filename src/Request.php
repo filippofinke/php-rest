@@ -56,6 +56,14 @@ class Request
         return null;
     }
 
+    public function hasHeader($header)
+    {
+        if ($this->getHeader($header)) {
+            return true;
+        }
+        return false;
+    }
+
     public function getParams()
     {
         return $this->params;
