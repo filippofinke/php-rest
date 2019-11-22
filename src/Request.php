@@ -18,6 +18,8 @@ class Request
 
     private $params;
 
+    private $attributes;
+
     public function getUri()
     {
         return $this->uri;
@@ -73,6 +75,19 @@ class Request
     {
         if (isset($this->params[$param])) {
             return $this->params[$param];
+        }
+        return null;
+    }
+
+    public function withAttribute($name, $value)
+    {
+        $this->attributes[$name] = $value;
+    }
+
+    public function getAttribute($name)
+    {
+        if (isset($this->attributes[$name])) {
+            return $this->attributes[$name];
         }
         return null;
     }
