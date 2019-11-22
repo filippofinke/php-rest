@@ -28,20 +28,17 @@ class Router
         );
         $uri = $request->getUri();
         $method = $request->getMethod();
-        $routeFound = false;
         if (isset($this->routes[$method])) {
             $routes = $this->routes[$method];
             foreach ($routes as $route) {
                 if ($route->getUri() === $uri) {
-                    $route->call($request, new Response());
-                    $routeFound = true;
-                    break;
+                    return $route->call($request, new Response());
                 }
             }
         }
-        if (!$routeFound) {
-            $response = new Response();
-            return $response->withText("$method $uri not found")->withStatus(404);
-        }
+
+        // Route not found
+        $response = new Response();
+        return $response->withText("$method $uri not found")->withStatus(404);
     }
 }
