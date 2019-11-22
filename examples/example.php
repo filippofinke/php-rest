@@ -31,4 +31,12 @@ $router->post('/', function ($req, $res) {
     return $res->withText('You are using POST!');
 });
 
+$router->put('/', function ($req, $res) {
+    return $res->withJson($req->getParams());
+});
+
+$router->delete('/', function ($req, $res) {
+    return $res->withJson($req->getParams());
+});
+
 $router->start();

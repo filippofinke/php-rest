@@ -22,6 +22,22 @@ class Router
         $this->routes["POST"][] = new Route($uri, $function);
     }
 
+    public function put($uri, $function)
+    {
+        if (!isset($this->routes["PUT"])) {
+            $this->routes["PUT"] = array();
+        }
+        $this->routes["PUT"][] = new Route($uri, $function);
+    }
+
+    public function delete($uri, $function)
+    {
+        if (!isset($this->routes["DELETE"])) {
+            $this->routes["DELETE"] = array();
+        }
+        $this->routes["DELETE"][] = new Route($uri, $function);
+    }
+
     public function start()
     {
         $request = new Request();

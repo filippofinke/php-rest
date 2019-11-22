@@ -82,7 +82,7 @@ class Request
         } elseif ($this->getMethod() === "POST") {
             $this->params = $_POST;
         } else {
-            $this->params = array();
+            parse_str(file_get_contents("php://input"), $this->params);
         }
     }
 }
