@@ -27,4 +27,8 @@ $router->get('/json', function ($req, $res) {
     );
 });
 
+$router->post('/', function ($req, $res) {
+    return $res->withText('You are using POST!');
+});
+
 $router->start();

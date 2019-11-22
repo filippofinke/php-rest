@@ -14,6 +14,14 @@ class Router
         $this->routes["GET"][] = new Route($uri, $function);
     }
 
+    public function post($uri, $function)
+    {
+        if (!isset($this->routes["POST"])) {
+            $this->routes["POST"] = array();
+        }
+        $this->routes["POST"][] = new Route($uri, $function);
+    }
+
     public function start()
     {
         $request = new Request();
