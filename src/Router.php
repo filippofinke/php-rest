@@ -11,7 +11,9 @@ class Router
         if (!isset($this->routes["GET"])) {
             $this->routes["GET"] = array();
         }
-        $this->routes["GET"][] = new Route($uri, $function);
+        $route = new Route($uri, $function);
+        $this->routes["GET"][] = $route;
+        return $route;
     }
 
     public function post($uri, $function)
@@ -19,7 +21,9 @@ class Router
         if (!isset($this->routes["POST"])) {
             $this->routes["POST"] = array();
         }
-        $this->routes["POST"][] = new Route($uri, $function);
+        $route = new Route($uri, $function);
+        $this->routes["POST"][] = $route;
+        return $route;
     }
 
     public function put($uri, $function)
@@ -27,7 +31,9 @@ class Router
         if (!isset($this->routes["PUT"])) {
             $this->routes["PUT"] = array();
         }
-        $this->routes["PUT"][] = new Route($uri, $function);
+        $route = new Route($uri, $function);
+        $this->routes["PUT"][] = $route;
+        return $route;
     }
 
     public function delete($uri, $function)
@@ -35,7 +41,9 @@ class Router
         if (!isset($this->routes["DELETE"])) {
             $this->routes["DELETE"] = array();
         }
-        $this->routes["DELETE"][] = new Route($uri, $function);
+        $route = new Route($uri, $function);
+        $this->routes["DELETE"][] = $route;
+        return $route;
     }
 
     public function start()
