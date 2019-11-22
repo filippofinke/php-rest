@@ -6,7 +6,11 @@ require __DIR__ . '/../vendor/autoload.php';
 $router = new Router();
 
 $router->get('/', function ($req, $res) {
-    $html = sprintf("<b>Request</b> from %s to %s with method %s", $req->getRemoteAddress(), $req->getUri(), $req->getMethod());
+    $html = sprintf("<b>Request</b> from %s to %s with method %s<br>%s", $req->getRemoteAddress(), $req->getUri(), $req->getMethod(), date("H:i:s d/m/Y", $req->getTime()));
+    $html .= "<br>Headers:";
+    foreach($req->getHeaders() as $header => $value) {
+        $html .= "<br>$header = $value";
+    }
     return $res->withHtml($html);
 });
 
