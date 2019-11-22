@@ -10,15 +10,20 @@ class Response
 
     private $status = 200;
 
-    public function getHeaders() {
+    private $redirect;
+
+    public function getHeaders()
+    {
         return $this->headers;
     }
 
-    public function getContent() {
+    public function getContent()
+    {
         return $this->content;
     }
 
-    public function getStatus() {
+    public function getStatus()
+    {
         return $this->status;
     }
 
@@ -43,7 +48,8 @@ class Response
 
     public function withText($text)
     {
-        $this->withHeader('Content-Type', 'text/plain');$this->content = $text;
+        $this->withHeader('Content-Type', 'text/plain');
+        $this->content = $text;
         return $this;
     }
 
@@ -54,7 +60,14 @@ class Response
         return $this;
     }
 
-    public function append($content) {
+    public function redirect($uri)
+    { 
+        $this->redirect = $uri;
+        return $this;
+    }
+
+    public function append($content)
+    {
         $this->content .= $content;
         return $this;
     }
@@ -65,6 +78,10 @@ class Response
         foreach ($this->headers as $header => $value) {
             header($header.': '.$value);
         }
-        echo $this->content;
+        if($this->redirect) {
+            header("Location: ".$this->redirect);
+        } else {
+            echo $this->content;
+        }
     }
 }

@@ -33,6 +33,10 @@ $router->get('/json', function ($req, $res) {
     );
 });
 
+$router->get('/redirect', function ($req, $res) {
+    return $res->redirect('/json')->withStatus(301);
+});
+
 $router->post('/', function ($req, $res) {
     return $res->withText('You are using POST!');
 });
