@@ -1,11 +1,24 @@
 {
   "name": "filippofinke/php-rest",
+  "description": "Simple php rest api framework",
+  "version": "1.0.0",
+  "keywords": [
+    "php",
+    "rest",
+    "api",
+    "rest-api"
+  ],
+  "homepage": "https://github.com/filippofinke/php-rest",
   "authors": [
     {
       "name": "Filippo Finke",
-      "email": "filippo.finke@samtrevano.ch"
+      "email": "filippo.finke@samtrevano.ch",
+      "homepage": "https://filippofinke.ch",
+      "role": "Developer"
     }
   ],
+  "type": "library",
+  "license": "MIT",
   "require": {},
   "autoload": {
     "psr-4": {
