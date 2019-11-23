@@ -106,7 +106,7 @@ class Request
         return null;
     }
 
-    public function getCookies()
+    public function &getCookies()
     {
         return $this->cookies;
     }
@@ -136,7 +136,7 @@ class Request
         $this->remotePort = $_SERVER["REMOTE_PORT"];
         $this->time = $_SERVER["REQUEST_TIME"];
         $this->timeFloat = $_SERVER["REQUEST_TIME_FLOAT"];
-        $this->cookies = $_COOKIE;
+        $this->cookies = &$_COOKIE;
         if ($this->getMethod() === "GET") {
             $this->params = $_GET;
         } elseif ($this->getMethod() === "POST") {
