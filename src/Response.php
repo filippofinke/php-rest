@@ -53,6 +53,20 @@ class Response
         return $this;
     }
 
+    public function withXml($xml)
+    {
+        $this->withHeader('Content-Type', 'text/xml');
+        $this->content = $xml;
+        return $this;
+    }
+
+    public function withCsv($csv)
+    {
+        $this->withHeader('Content-Type', 'text/csv');
+        $this->content = $csv;
+        return $this;
+    }
+
     public function withJson($array)
     {
         $this->withHeader('Content-Type', 'application/json');
