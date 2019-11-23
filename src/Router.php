@@ -5,6 +5,11 @@ namespace FilippoFinke;
 class Router
 {
     private $routes = array();
+
+    public function getRoutes()
+    {
+        return $this->routes;
+    }
     
     public function __call($method, $args)
     {
@@ -43,7 +48,7 @@ class Router
                 }
             }
         }
-
+        
         // Route not found
         $response = new Response();
         return $response->withText("$method $uri not found")->withStatus(404);
