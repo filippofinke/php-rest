@@ -36,7 +36,8 @@ $router->get('/json', function ($req, $res) {
             'time' => $req->getTime(),
             'time_float' => $req->getTimeFloat(),
             'params' => $req->getParams(),
-            'attibutes' => $req->getAttributes()
+            'attibutes' => $req->getAttributes(),
+            'cookies' => $req->getCookies()
         )
     );
 });

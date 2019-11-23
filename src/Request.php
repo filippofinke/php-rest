@@ -22,6 +22,8 @@ class Request
 
     private $attributes;
 
+    private $cookies;
+
     public function getUri()
     {
         return $this->uri;
@@ -104,6 +106,27 @@ class Request
         return null;
     }
 
+    public function getCookies()
+    {
+        return $this->cookies;
+    }
+
+    public function getCookie($name)
+    {
+        if (isset($this->cookies[$name])) {
+            return $this->cookies[$name];
+        }
+        return null;
+    }
+
+    public function hasCookie($name)
+    {
+        if ($this->getCookie($name)) {
+            return true;
+        }
+        return false;
+    }
+
     public function __construct()
     {
         $this->uri = $_SERVER["PHP_SELF"];
@@ -113,6 +136,7 @@ class Request
         $this->remotePort = $_SERVER["REMOTE_PORT"];
         $this->time = $_SERVER["REQUEST_TIME"];
         $this->timeFloat = $_SERVER["REQUEST_TIME_FLOAT"];
+        $this->cookies = $_COOKIE;
         if ($this->getMethod() === "GET") {
             $this->params = $_GET;
         } elseif ($this->getMethod() === "POST") {
