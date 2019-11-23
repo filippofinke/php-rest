@@ -127,6 +127,7 @@ class Request
         return false;
     }
 
+
     public function __construct()
     {
         $this->uri = $_SERVER["PHP_SELF"];
