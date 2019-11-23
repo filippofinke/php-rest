@@ -53,9 +53,8 @@ $router->map(['post','put','delete'], '/', function ($req, $res) {
 
 $router->get('/([a-zA-Z]*)', function ($req, $res) {
     $name = $req->getAttribute('args')[1];
-    $text = 'Hello '.$name.'!';
-    return $res->withText($text);
-});
+    return $res->render(__DIR__ . '/template.php', array('name' => $name));
+})->after(new ContentLengthMiddleware());
 
 $router->get('/user/([0-9]*)', function ($req, $res) {
     $id = $req->getAttribute('args')[1];

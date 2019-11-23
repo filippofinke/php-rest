@@ -86,6 +86,18 @@ class Response
         return $this;
     }
 
+    public function render($template, $args = null)
+    {
+        if (is_array($args)) {
+            foreach ($args as $name => $value) {
+                $$name = $value;
+            }
+        }
+        ob_start();
+        require($template);
+        $this->content = ob_get_clean();
+    }
+
     public function __destruct()
     {
         http_response_code($this->status);
