@@ -6,43 +6,14 @@ class Router
 {
     private $routes = array();
     
-    public function get($uri, $function)
+    public function __call($method, $args)
     {
-        if (!isset($this->routes["GET"])) {
-            $this->routes["GET"] = array();
+        $method = \strtoupper($method);
+        if (!isset($this->routes[$method])) {
+            $this->routes[$method] = array();
         }
-        $route = new Route($uri, $function);
-        $this->routes["GET"][] = $route;
-        return $route;
-    }
-
-    public function post($uri, $function)
-    {
-        if (!isset($this->routes["POST"])) {
-            $this->routes["POST"] = array();
-        }
-        $route = new Route($uri, $function);
-        $this->routes["POST"][] = $route;
-        return $route;
-    }
-
-    public function put($uri, $function)
-    {
-        if (!isset($this->routes["PUT"])) {
-            $this->routes["PUT"] = array();
-        }
-        $route = new Route($uri, $function);
-        $this->routes["PUT"][] = $route;
-        return $route;
-    }
-
-    public function delete($uri, $function)
-    {
-        if (!isset($this->routes["DELETE"])) {
-            $this->routes["DELETE"] = array();
-        }
-        $route = new Route($uri, $function);
-        $this->routes["DELETE"][] = $route;
+        $route = new Route($args[0], $args[1]);
+        $this->routes[$method][] = $route;
         return $route;
     }
 
