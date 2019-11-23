@@ -48,7 +48,7 @@ class Route
 
     public function __construct($uri, $function)
     {
-        $this->uri = $uri;
+        $this->uri = str_replace("/", "\/", $uri);
         $this->function = $function;
     }
 }

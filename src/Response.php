@@ -61,7 +61,7 @@ class Response
     }
 
     public function redirect($uri)
-    { 
+    {
         $this->redirect = $uri;
         return $this;
     }
@@ -78,7 +78,7 @@ class Response
         foreach ($this->headers as $header => $value) {
             header($header.': '.$value);
         }
-        if($this->redirect) {
+        if ($this->redirect) {
             header("Location: ".$this->redirect);
         } else {
             echo $this->content;

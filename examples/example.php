@@ -49,4 +49,20 @@ $router->delete('/', function ($req, $res) {
     return $res->withJson($req->getParams());
 });
 
+$router->get('/([a-zA-Z]*)', function ($req, $res) {
+    $name = $req->getAttribute('args')[1];
+    $text = 'Hello '.$name.'!';
+    return $res->withText($text);
+});
+
+$router->get('/user/([0-9]*)', function ($req, $res) {
+    $id = $req->getAttribute('args')[1];
+    return $res->withText('User by id: '.$id);
+});
+
+$router->get('/user/([a-zA-Z]*)', function ($req, $res) {
+    $name = $req->getAttribute('args')[1];
+    return $res->withText('User by name: '.$name);
+});
+
 $router->start();

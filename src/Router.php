@@ -25,8 +25,10 @@ class Router
         if (isset($this->routes[$method])) {
             $routes = $this->routes[$method];
             foreach ($routes as $route) {
-                if ($route->getUri() === $uri) {
+                preg_match('/^'.$route->getUri().'$/', $uri, $output);
+                if ($output) {
                     $response = new Response();
+                    $request->withAttribute('args', $output);
                     return $route->call($request, $response);
                 }
             }
