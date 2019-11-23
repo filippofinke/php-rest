@@ -19,6 +19,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $router = new Router();
 // Do your stuff
+$router->start();
 ```
 
 ## Add a route
