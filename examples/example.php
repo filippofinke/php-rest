@@ -28,8 +28,15 @@ $router->get('/', function ($req, $res) {
 $router->get('/json', function ($req, $res) {
     return $res->withJson(
         array(
-            'status' => true,
-            'json' => [1,2,3,4,5]
+            'uri' => $req->getUri(),
+            'method' => $req->getMethod(),
+            'headers' => $req->getHeaders(),
+            'remote_address' => $req->getRemoteAddress(),
+            'remote_port' => $req->getRemotePort(),
+            'time' => $req->getTime(),
+            'time_float' => $req->getTimeFloat(),
+            'params' => $req->getParams(),
+            'attibutes' => $req->getAttributes()
         )
     );
 });

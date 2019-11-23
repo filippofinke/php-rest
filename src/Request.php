@@ -12,6 +12,8 @@ class Request
     
     private $remoteAddress;
 
+    private $remotePort;
+
     private $time;
 
     private $timeFloat;
@@ -38,6 +40,11 @@ class Request
     public function getRemoteAddress()
     {
         return $this->remoteAddress;
+    }
+
+    public function getRemotePort()
+    {
+        return $this->remotePort;
     }
 
     public function getTime()
@@ -79,6 +86,11 @@ class Request
         return null;
     }
 
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
     public function withAttribute($name, $value)
     {
         $this->attributes[$name] = $value;
@@ -98,6 +110,7 @@ class Request
         $this->method = $_SERVER["REQUEST_METHOD"];
         $this->headers = getallheaders();
         $this->remoteAddress = $_SERVER["REMOTE_ADDR"];
+        $this->remotePort = $_SERVER["REMOTE_PORT"];
         $this->time = $_SERVER["REQUEST_TIME"];
         $this->timeFloat = $_SERVER["REQUEST_TIME_FLOAT"];
         if ($this->getMethod() === "GET") {
