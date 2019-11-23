@@ -37,17 +37,23 @@ $router->get('/redirect', function ($req, $res) {
     return $res->redirect('/json')->withStatus(301);
 });
 
+$testMiddleware = function ($req, $res) {
+    $res->withHeader('Test-Middlware', 'Before');
+};
+
 $router->post('/', function ($req, $res) {
-    return $res->withText('You are using POST!');
-});
+    $response = array();
+    $response[] = $req->getParams();
+    return $res->withJson($response);
+})->before($testMiddleware);
 
 $router->put('/', function ($req, $res) {
     return $res->withJson($req->getParams());
-});
+})->before($testMiddleware);
 
 $router->delete('/', function ($req, $res) {
     return $res->withJson($req->getParams());
-});
+})->before($testMiddleware);
 
 $router->get('/([a-zA-Z]*)', function ($req, $res) {
     $name = $req->getAttribute('args')[1];
