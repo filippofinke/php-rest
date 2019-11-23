@@ -17,6 +17,16 @@ class Router
         return $route;
     }
 
+    public function map($methods, $uri, $function)
+    {
+        $routeGroup = new RouteGroup();
+        foreach ($methods as $method) {
+            $route = $this->{$method}($uri, $function);
+            $routeGroup->add($route);
+        }
+        return $routeGroup;
+    }
+
     public function start()
     {
         $request = new Request();
