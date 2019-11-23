@@ -1,5 +1,6 @@
 <?php
 use FilippoFinke\Router;
+use FilippoFinke\Middleware\ContentLengthMiddleware;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -32,6 +33,10 @@ $router->get('/json', function ($req, $res) {
         )
     );
 });
+
+$router->get('/contentLength', function ($req, $res) {
+    return $res->withText('12345');
+})->after(new ContentLengthMiddleware());
 
 $router->get('/redirect', function ($req, $res) {
     return $res->redirect('/json')->withStatus(301);
