@@ -74,6 +74,11 @@ class Response
         return $this;
     }
 
+    public function withBody($body) {
+        $this->content = $body;
+        return $this;
+    }
+
     public function redirect($uri)
     {
         $this->redirect = $uri;
