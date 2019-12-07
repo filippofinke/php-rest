@@ -5,6 +5,8 @@ class Route
 {
     private $uri;
 
+    private $method;
+
     private $function;
 
     private $before;
@@ -19,6 +21,10 @@ class Route
     public function getFunction()
     {
         return $this->function;
+    }
+
+    public function getMethod() {
+        return $this->method;
     }
 
     public function before($function)
@@ -46,8 +52,9 @@ class Route
         }
     }
 
-    public function __construct($uri, $function)
+    public function __construct($method, $uri, $function)
     {
+        $this->method = $method;
         $this->uri = str_replace("/", "\/", $uri);
         $this->function = $function;
     }

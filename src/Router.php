@@ -17,7 +17,7 @@ class Router
         if (!isset($this->routes[$method])) {
             $this->routes[$method] = array();
         }
-        $route = new Route($args[0], $args[1]);
+        $route = new Route($method, $args[0], $args[1]);
         $this->routes[$method][] = $route;
         return $route;
     }

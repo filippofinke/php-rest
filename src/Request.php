@@ -130,7 +130,7 @@ class Request
 
     public function __construct()
     {
-        $this->uri = $_SERVER["PHP_SELF"];
+        $this->uri = $_SERVER["REQUEST_URI"];
         $this->method = $_SERVER["REQUEST_METHOD"];
         $this->headers = getallheaders();
         $this->remoteAddress = $_SERVER["REMOTE_ADDR"];
