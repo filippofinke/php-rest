@@ -1,7 +1,7 @@
 {
   "name": "filippofinke/php-rest",
   "description": "Simple php rest api framework",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "keywords": [
     "php",
     "rest",
