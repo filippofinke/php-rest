@@ -31,10 +31,10 @@ class CorsMiddleware
             $response->withHeader('Access-Control-Allow-Methods', \strtoupper(implode(", ", $this->methods)));
         }
         if ($this->headers) {
-            $response->withHeader('Access-Control-Allow-Headers', \strtoupper(implode(", ", $this->headers)));
+            $response->withHeader('Access-Control-Allow-Headers', implode(", ", $this->headers));
         }
         if ($this->exposeHeaders) {
-            $response->withHeader('Access-Control-Expose-Headers', \strtoupper(implode(", ", $this->exposeHeaders)));
+            $response->withHeader('Access-Control-Expose-Headers', implode(", ", $this->exposeHeaders));
         }
         if ($this->maxAge) {
             $response->withHeader('Access-Control-Max-Age', $this->maxAge);
