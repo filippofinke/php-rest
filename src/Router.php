@@ -6,9 +6,25 @@ class Router
 {
     private $routes = array();
 
+    private $before = array();
+    
+    private $after = array();
+
     public function getRoutes()
     {
         return $this->routes;
+    }
+
+    public function before($function)
+    {
+        $this->before[] = $function;
+        return $this;
+    }
+
+    public function after($function)
+    {
+        $this->after[] = $function;
+        return $this;
     }
     
     public function __call($method, $args)
@@ -44,12 +60,20 @@ class Router
                 if ($output) {
                     $response = new Response();
                     $request->withAttribute('args', $output);
-                    return $route->call($request, $response);
+                    foreach ($this->before as $before) {
+                        \call_user_func($before, $request, $response);
+                    }
+                    
+                    $route->call($request, $response);
+                    
+                    foreach ($this->after as $after) {
+                        \call_user_func($after, $request, $response);
+                    }
+                    return;
                 }
             }
         }
-        
-        // Route not found
+
         $response = new Response();
         return $response->withText("$method $uri not found")->withStatus(404);
     }

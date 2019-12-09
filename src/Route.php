@@ -23,32 +23,33 @@ class Route
         return $this->function;
     }
 
-    public function getMethod() {
+    public function getMethod()
+    {
         return $this->method;
     }
 
     public function before($function)
     {
-        $this->before = $function;
+        $this->before[] = $function;
         return $this;
     }
 
     public function after($function)
     {
-        $this->after = $function;
+        $this->after[] = $function;
         return $this;
     }
  
     public function call(&$request, &$response)
     {
-        if ($this->before) {
-            \call_user_func($this->before, $request, $response);
+        foreach ($this->before as $before) {
+            \call_user_func($before, $request, $response);
         }
 
         \call_user_func($this->function, $request, $response);
 
-        if ($this->after) {
-            \call_user_func($this->after, $request, $response);
+        foreach ($this->after as $after) {
+            \call_user_func($after, $request, $response);
         }
     }
 
@@ -57,5 +58,7 @@ class Route
         $this->method = $method;
         $this->uri = str_replace("/", "\/", $uri);
         $this->function = $function;
+        $this->before = array();
+        $this->after = array();
     }
 }
