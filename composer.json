@@ -19,10 +19,12 @@
   ],
   "type": "library",
   "license": "MIT",
-  "require": {},
   "autoload": {
     "psr-4": {
       "FilippoFinke\\": "src/"
     }
+  },
+  "require": {
+    "filippofinke/php-route-parser": "@dev"
   }
 }

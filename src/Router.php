@@ -1,6 +1,7 @@
 <?php
-
 namespace FilippoFinke;
+
+require __DIR__ . '/../vendor/autoload.php';
 
 class Router
 {
@@ -56,10 +57,12 @@ class Router
         if (isset($this->routes[$method])) {
             $routes = $this->routes[$method];
             foreach ($routes as $route) {
-                preg_match('/^'.$route->getUri().'$/', $uri, $output);
-                if ($output) {
+                $matches = $route->match($uri);
+                if ($matches) {
                     $response = new Response();
-                    $request->withAttribute('args', $output);
+                    foreach ($matches as $match => $value) {
+                        $request->withAttribute($match, $value);
+                    }
                     foreach ($this->before as $before) {
                         \call_user_func($before, $request, $response);
                     }

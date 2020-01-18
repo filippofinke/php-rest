@@ -13,6 +13,12 @@ class Route
 
     private $after;
 
+    private $parser;
+
+    public function match($uri) {
+        return $this->parser->parse($uri);
+    }
+
     public function getUri()
     {
         return $this->uri;
@@ -56,7 +62,7 @@ class Route
     public function __construct($method, $uri, $function)
     {
         $this->method = $method;
-        $this->uri = str_replace("/", "\/", $uri);
+        $this->parser = new RouteParser($uri);
         $this->function = $function;
         $this->before = array();
         $this->after = array();
