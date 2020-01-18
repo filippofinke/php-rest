@@ -1,8 +1,6 @@
 <?php
 namespace FilippoFinke;
 
-require __DIR__ . '/../vendor/autoload.php';
-
 class Router
 {
     private $routes = array();
