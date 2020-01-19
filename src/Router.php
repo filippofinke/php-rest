@@ -58,8 +58,10 @@ class Router
                 $matches = $route->match($uri);
                 if ($matches) {
                     $response = new Response();
-                    foreach ($matches as $match => $value) {
-                        $request->withAttribute($match, $value);
+                    if(is_array($matches)) {
+                        foreach ($matches as $match => $value) {
+                            $request->withAttribute($match, $value);
+                        }
                     }
                     foreach ($this->before as $before) {
                         \call_user_func($before, $request, $response);
