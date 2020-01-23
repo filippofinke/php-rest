@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @author Filippo Finke
+ */
 namespace FilippoFinke\Middleware;
 
 class ContentLengthMiddleware
