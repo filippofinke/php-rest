@@ -12,9 +12,9 @@ class Route
 
     private $function;
 
-    private $before;
+    private $before = [];
 
-    private $after;
+    private $after = [];
 
     private $parser;
 
@@ -67,7 +67,5 @@ class Route
         $this->method = $method;
         $this->parser = new RouteParser($uri);
         $this->function = $function;
-        $this->before = array();
-        $this->after = array();
     }
 }
