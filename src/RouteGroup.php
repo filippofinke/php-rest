@@ -13,9 +13,11 @@ class RouteGroup
         return $this->routes;
     }
 
-    public function add($route)
+    public function add(...$routes)
     {
-        $this->routes[] = $route;
+        foreach ($routes as $route) {
+            $this->routes[] = $route;
+        }
         return $this;
     }
 
