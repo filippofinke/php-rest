@@ -12,6 +12,8 @@ class Router
     
     private $after = array();
 
+    private $notFound = null;
+
     public function getRoutes()
     {
         return $this->routes;
@@ -27,6 +29,10 @@ class Router
     {
         $this->after[] = $function;
         return $this;
+    }
+
+    public function setNotFound($function) {
+        $this->notFound = $function;
     }
     
     public function __call($method, $args)
@@ -80,7 +86,11 @@ class Router
             }
         }
 
-        $response = new Response();
-        return $response->withText("$method $uri not found")->withStatus(404);
+        if($this->notFound) {
+            return \call_user_func($this->notFound, $request, $response);
+        } else {
+            $response = new Response();
+            return $response->withText("$method $uri not found")->withStatus(404);
+        }
     }
 }
