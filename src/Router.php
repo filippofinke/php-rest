@@ -87,7 +87,7 @@ class Router
         }
 
         if($this->notFound) {
-            return \call_user_func($this->notFound, $request, $response);
+            return \call_user_func($this->notFound, $request, new Response());
         } else {
             $response = new Response();
             return $response->withText("$method $uri not found")->withStatus(404);
